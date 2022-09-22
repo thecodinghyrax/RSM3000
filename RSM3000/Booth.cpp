@@ -1,41 +1,59 @@
 #include "Booth.h"
 Booth::Booth() {
-
+	setTableNumber(201);
+	setCapacity(6);
+	setDiners(0);
+	setOccupied(false);
 };
-Booth::Booth(int _section) {
 
+Booth::Booth(int tableNumber) {
+	setTableNumber(tableNumber);
+	setCapacity(6);
+	setDiners(0);
+	setOccupied(false);
 };
-Booth::Booth(int _section, int _capacity) {
 
+Booth::Booth(int tableNumber, int capacity) {
+	setTableNumber(tableNumber);
+	setCapacity(capacity);
+	setDiners(0);
+	setOccupied(false);
 };
+
 Booth::~Booth() {
-
 };
 
-void Booth::setCapacity(int _capacity) {
+void Booth::setTableNumber(int tableNumber) {
+	_tableNumber = tableNumber;
+};
+int Booth::getTableNumber() {
+	return _tableNumber;
+};
 
+void Booth::setCapacity(int capacity) {
+	_capacity = capacity;
 };
 int Booth::getCapacity() {
-
+	return _capacity;
 };
 
-void Booth::setSection(int _section) {
-
-};
-int Booth::getSection() {
-
-};
-
-void Booth::setTimeSeated() {
-
+void Booth::setTimeSeated(std::string time) {
+	_timeSeated = time;
 };
 std::string Booth::getTimeSeated() {
-
+	return _timeSeated;
 };
 
-void Booth::setOccupied() {
-
+void Booth::setOccupied(bool occupied) {
+	_occupied = occupied;
 };
 bool Booth::getOccupied() {
+	return _occupied;
+};
 
+void Booth::setDiners(int number) {
+	_numberOfDiners = number;
+};
+bool Booth::getDiners() {
+	return _numberOfDiners;
 };

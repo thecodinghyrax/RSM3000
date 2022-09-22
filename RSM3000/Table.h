@@ -3,27 +3,26 @@
 class Table :
     public SeatingGroup
 {
-private:
-	int _capacity;
-	int _seatingSection;
-	std::string _timeSeated;
-	bool _occupied;
+
 public:
 	Table();
-	Table(int _section);
-	Table(int _section, int _capacity);
+	Table(int tableNumber);
+	Table(int tableNumber, int capacity);
 	~Table();
 
-	void setCapacity(int _capacity);
+	void setTableNumber(int tableNumber);
+	int getTableNumber();
+
+	void setCapacity(int capacity);
 	int getCapacity();
 
-	void setSection(int _section);
-	int getSection();
-
-	void setTimeSeated();
+	void setTimeSeated(std::string time);
 	std::string getTimeSeated();
 
-	void setOccupied();
+	void setOccupied(bool occupied);
 	bool getOccupied();
+
+	void setDiners(int number);
+	bool getDiners();
 };
 

@@ -1,20 +1,38 @@
-// RSM3000.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <vector>
+#include "SeatingGroup.h"
+#include "Table.h"
+#include "Booth.h"
+#include "Bar.h"
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Using a vector of smart pointers of the base class type
+    // to store instances of derived classes. This allows us to 
+    // keep all table types together in one place. 
+    std::vector<std::unique_ptr<SeatingGroup>> restaurant;
+
+
+    restaurant.emplace_back(new Table);
+    restaurant.emplace_back(new Table(102));
+    restaurant.emplace_back(new Table(103, 12));
+    restaurant.emplace_back(new Booth);
+    restaurant.emplace_back(new Booth(202));
+    restaurant.emplace_back(new Booth(203, 4));
+    restaurant.emplace_back(new Bar);
+    restaurant.emplace_back(new Bar(302));
+    restaurant.emplace_back(new Bar(303, 50));
+
+    for (int i = 0; i < restaurant.size(); ++i) {
+        std::cout << "Capacity: "<<restaurant.at(i)->getCapacity() << std::endl;
+        std::cout << "Number of Diners: "<<restaurant.at(i)->getDiners() << std::endl;
+        std::cout << "Is Occupied?: "<<restaurant.at(i)->getOccupied() << std::endl;
+        std::cout << "Table Number: "<<restaurant.at(i)->getTableNumber() << std::endl;
+        std::cout << "Time Seated: "<<restaurant.at(i)->getTimeSeated() << std::endl << std::endl;
+
+    }
+ 
+
+
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
