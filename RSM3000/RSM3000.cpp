@@ -1,20 +1,44 @@
-// RSM3000.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    string input;
+
+    cout << "Restaurant Seating Manager 3000 Menu" << endl;
+    cout << "1. Seat a party" << endl;
+
+    cout << endl << "Select an option: ";
+    cin >> input;
+
+    if (input == "1"){
+        cout << "Enter the party size: ";
+        cin >> input;
+        //TODO: Validate input is an integer larger than 1
+        cout << "Enter the preferred table type. T for table, B for booth, R for bar, or N for no preference: ";
+        cin >> input;
+        while (input != "t" && input != "T" && input != "b"
+               && input != "B" && input != "r" && input != "R"
+               && input != "n" && input != "N"){ //TODO: Better way to code this?
+            cout << "Invalid input. Please enter T for table, B for booth, R for bar, or N for no preference: ";
+            cin >> input;
+        }
+        //TODO: Function to determine the table
+        int tableNumber = 1;
+        cout << "The party should be seated at table " << tableNumber << ". Enter Y to confirm, or N to manually select a table: ";
+        cin >> input;
+        while (input != "y" && input != "Y" && input != "n" && input != "N"){
+            cout << "Invalid input. Please enter Y to confirm table " << tableNumber << ", or N to manually select a table: ";
+            cin >> input;
+        }
+        if (input == "y" || input == "Y"){
+            cout << "Party sucessfully seated at table " << tableNumber << endl;
+            //TODO: Change table's status to occupied
+        }
+        if (input == "n" || input == "N"){
+            //TODO: List available tables and allow user to select one
+        }
+    }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
