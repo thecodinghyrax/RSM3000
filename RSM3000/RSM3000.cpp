@@ -1,11 +1,26 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <memory>
+#include "SeatingGroup.h"
+#include "Bar.cpp"
+#include "Booth.cpp"
+#include "Table.cpp"
 
 using namespace std;
+
+int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize);
 
 int main()
 {
     string input;
+    vector<SeatingGroup*> seating;
+    Booth b = Booth();
+
+    // Default seating for testing
+    seating.push_back(&b);
+    //seating.push_back(make_unique<Booth>(200));
+    //seating.push_back(make_unique<Booth>(205,4));
 
     cout << "Restaurant Seating Manager 3000 Menu" << endl;
 
@@ -28,8 +43,10 @@ int main()
                 cout << "Invalid input. Please enter T for table, B for booth, R for bar, or N for no preference: ";
                 cin >> input;
             }
-            //TODO: Function to determine the table
-            int tableNumber = 1;
+
+            int tableIndex = getSeatingRec(seating, "booth", 6);
+            int tableNumber = seating[tableIndex]->getTableNumber();
+
             cout << "The party should be seated at table " << tableNumber << ". Enter Y to confirm, or N to manually select a table: ";
             cin >> input;
             while (input != "y" && input != "Y" && input != "n" && input != "N"){
@@ -37,6 +54,7 @@ int main()
                 cin >> input;
             }
             if (input == "y" || input == "Y"){
+                seating[tableIndex]->setOccupied(true);
                 cout << "Party sucessfully seated at table " << tableNumber << endl;
                 //TODO: Change table's status to occupied
             }
@@ -46,4 +64,19 @@ int main()
         }
 
     }
+}
+
+int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize){
+    int match = -1;
+    int count = 0;
+    // First phase, checks for perfect match
+    for (auto& s: seating){
+        if (!s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType){
+            match = count;
+        }
+        count++;
+    }
+
+    // Second phase, checks for same type but larger capacity than party size
+    return match;
 }
