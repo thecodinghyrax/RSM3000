@@ -92,8 +92,6 @@ int main()
                 cout << "No tables found, party size might be too big or the restaurant is full." << endl;
             }
 
-
-
         }
 
     }
@@ -102,20 +100,34 @@ int main()
 int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize){
     int match = -1;
     int count = 0;
-    // First phase, checks for perfect match
-    for (auto& s: seating){
-        if (!s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType){
-            match = count;
+    // Skip to phase 3 for no preference
+    if (seatingType != "np"){
+        // First phase, checks for perfect match
+        for (auto& s: seating){
+            if (!s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType){
+                match = count;
+            }
+            count++;
         }
-        count++;
+        if (match > -1){
+            return match;
+        }
+        // Second phase, checks for same type but larger capacity than party size
+        count = 0;
+        for (auto& s: seating){
+            if (!s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType){
+                match = count;
+            }
+            count++;
+        }
+        if (match > -1){
+            return match;
+        }
     }
-    if (match > -1){
-        return match;
-    }
-    // Second phase, checks for same type but larger capacity than party size
+    // Third phase, find table of different type of same capacity
     count = 0;
     for (auto& s: seating){
-        if (!s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType){
+        if (!s->getOccupied() && s->getCapacity() == partySize){
             match = count;
         }
         count++;
@@ -123,7 +135,7 @@ int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySi
     if (match > -1){
         return match;
     }
-    // Third phase, find table of different type
+    // Fourth phase, find table of any type and larger capacity
     count = 0;
     for (auto& s: seating){
         if (!s->getOccupied() && s->getCapacity() > partySize){
