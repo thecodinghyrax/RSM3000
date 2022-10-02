@@ -57,3 +57,7 @@ void Booth::setDiners(int number) {
 bool Booth::getDiners() {
 	return _numberOfDiners;
 };
+
+std::string Booth::getSeatingType(){
+    return "booth";
+}

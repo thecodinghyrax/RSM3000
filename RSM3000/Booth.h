@@ -28,5 +28,7 @@ public:
 
 	void setDiners(int number) override;
 	bool getDiners();
+
+    std::string getSeatingType();
 };
 

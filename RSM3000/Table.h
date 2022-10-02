@@ -24,5 +24,7 @@ public:
 
 	void setDiners(int number);
 	bool getDiners();
+
+    std::string getSeatingType();
 };
 

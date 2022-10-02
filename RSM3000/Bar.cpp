@@ -55,3 +55,7 @@ bool Bar::getDiners() {
 	return _numberOfDiners;
 };
 
+std::string Bar::getSeatingType(){
+    return "bar";
+}
+
