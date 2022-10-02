@@ -70,23 +70,30 @@ int main()
 
 
             int tableIndex = getSeatingRec(seating, prefType, partySize);
-            int tableNumber = seating[tableIndex]->getTableNumber();
-            string tableType = seating[tableIndex]->getSeatingType();
+            if (tableIndex > -1){
+                int tableNumber = seating[tableIndex]->getTableNumber();
+                string tableType = seating[tableIndex]->getSeatingType();
 
-            cout << "The party should be seated at " << tableType << " " << tableNumber << ". Enter Y to confirm, or N to manually select a table: ";
-            cin >> input;
-            while (input != "y" && input != "Y" && input != "n" && input != "N"){
-                cout << "Invalid input. Please enter Y to confirm table " << tableNumber << ", or N to manually select a table: ";
+                cout << "The party should be seated at " << tableType << " " << tableNumber << ". Enter Y to confirm, or N to manually select a table: ";
                 cin >> input;
+                while (input != "y" && input != "Y" && input != "n" && input != "N"){
+                    cout << "Invalid input. Please enter Y to confirm table " << tableNumber << ", or N to manually select a table: ";
+                    cin >> input;
+                }
+                if (input == "y" || input == "Y"){
+                    seating[tableIndex]->setOccupied(true);
+                    cout << "Party sucessfully seated at table " << tableNumber << endl;
+                    //TODO: Change table's status to occupied
+                }
+                if (input == "n" || input == "N"){
+                    //TODO: List available tables and allow user to select one
+                }
+            } else { // No tables found, send back to menu to re-enter party or clear tables
+                cout << "No tables found, party size might be too big or the restaurant is full." << endl;
             }
-            if (input == "y" || input == "Y"){
-                seating[tableIndex]->setOccupied(true);
-                cout << "Party sucessfully seated at table " << tableNumber << endl;
-                //TODO: Change table's status to occupied
-            }
-            if (input == "n" || input == "N"){
-                //TODO: List available tables and allow user to select one
-            }
+
+
+
         }
 
     }
