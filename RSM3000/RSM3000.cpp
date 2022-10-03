@@ -90,6 +90,7 @@ int main()
                     if (getNumOpenSeating(seating) > 0){
                         cout << "All availiable tables: " << endl;
                         int count = 0;
+                        // List each table and its index
                         for (auto& s : seating){
                             if (!s->getOccupied()){
                                 cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
@@ -102,6 +103,7 @@ int main()
                             cin >> input;
                             try {
                             tableIndex = stoi(input);
+                            // Validate index input
                             if (tableIndex >= 0 && tableIndex < seating.size()){
                                 validInput = true;
                             } else {
@@ -114,7 +116,7 @@ int main()
 
                         seating[tableIndex]->setOccupied(true);
                         cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << endl;
-                    } else {
+                    } else { // If getNumOpenSeating is 0
                         cout << "All tables are currently occupied." << endl;
                     }
                 }
@@ -127,6 +129,7 @@ int main()
     }
 }
 
+// Returns the index number of a seating object based on the input seating type and party size
 int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize){
     int match = -1;
     int count = 0;
@@ -181,6 +184,7 @@ int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySi
     return match;
 }
 
+// Counts and returns the number of unoccupied tables
 int getNumOpenSeating (vector<SeatingGroup*> seating){
     int numOpen = 0;
     for (auto& s : seating){
