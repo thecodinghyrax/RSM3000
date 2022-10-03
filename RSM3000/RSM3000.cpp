@@ -3,9 +3,9 @@
 #include <vector>
 #include <memory>
 #include "SeatingGroup.h"
-#include "Bar.cpp"
-#include "Booth.cpp"
-#include "Table.cpp"
+#include "Bar.h"
+#include "Booth.h"
+#include "Table.h"
 
 using namespace std;
 
