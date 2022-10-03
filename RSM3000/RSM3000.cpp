@@ -10,6 +10,7 @@
 using namespace std;
 
 int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize);
+int getNumOpenSeating (vector<SeatingGroup*> seating);
 
 int main()
 {
@@ -83,21 +84,39 @@ int main()
                 if (input == "y" || input == "Y"){
                     seating[tableIndex]->setOccupied(true);
                     cout << "Party sucessfully seated at table " << tableNumber << endl;
-                    //TODO: Change table's status to occupied
                 }
                 if (input == "n" || input == "N"){
-                    cout << "All availiable tables: " << endl;
-                    int count = 0;
-                    for (auto& s : seating){
-                        if (!s->getOccupied()){
-                            cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
-                                    ", seats " << s->getCapacity() << endl;
+                    // Check if there are open seats, if not go back to the menu
+                    if (getNumOpenSeating(seating) > 0){
+                        cout << "All availiable tables: " << endl;
+                        int count = 0;
+                        for (auto& s : seating){
+                            if (!s->getOccupied()){
+                                cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
+                                        ", seats " << s->getCapacity() << endl;
+                            }
+                            count++;
                         }
-                        count++;
+                        bool validInput = false;
+                        while (!validInput){
+                            cin >> input;
+                            try {
+                            tableIndex = stoi(input);
+                            if (tableIndex >= 0 && tableIndex < seating.size()){
+                                validInput = true;
+                            } else {
+                                cout << "Invalid input, please re-enter: ";
+                            }
+                            } catch (exception e){
+                                cout << "Invalid input, please re-enter: ";
+                            }
+                        }
+
+                        seating[tableIndex]->setOccupied(true);
+                        cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << endl;
+                    } else {
+                        cout << "All tables are currently occupied." << endl;
                     }
-                    cin >> tableIndex;
-                    seating[tableIndex]->setOccupied(true);
-                    cout << "Party sucessfully seasted at table " << seating[tableIndex]->getTableNumber() << endl;
                 }
             } else { // No tables found, send back to menu to re-enter party or clear tables
                 cout << "No tables found, party size might be too big or the restaurant is full." << endl;
@@ -160,4 +179,14 @@ int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySi
 
     // If no tables found returns -1
     return match;
+}
+
+int getNumOpenSeating (vector<SeatingGroup*> seating){
+    int numOpen = 0;
+    for (auto& s : seating){
+        if (!s->getOccupied()){
+            numOpen++;
+        }
+    }
+    return numOpen;
 }
