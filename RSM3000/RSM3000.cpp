@@ -86,7 +86,18 @@ int main()
                     //TODO: Change table's status to occupied
                 }
                 if (input == "n" || input == "N"){
-                    //TODO: List available tables and allow user to select one
+                    cout << "All availiable tables: " << endl;
+                    int count = 0;
+                    for (auto& s : seating){
+                        if (!s->getOccupied()){
+                            cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
+                                    ", seats " << s->getCapacity() << endl;
+                        }
+                        count++;
+                    }
+                    cin >> tableIndex;
+                    seating[tableIndex]->setOccupied(true);
+                    cout << "Party sucessfully seasted at table " << seating[tableIndex]->getTableNumber() << endl;
                 }
             } else { // No tables found, send back to menu to re-enter party or clear tables
                 cout << "No tables found, party size might be too big or the restaurant is full." << endl;
