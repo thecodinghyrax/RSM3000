@@ -23,5 +23,7 @@ public:
 
 	virtual void setDiners(int number) = 0;
 	virtual bool getDiners() = 0;
+
+    virtual std::string getSeatingType() = 0;
 };
 

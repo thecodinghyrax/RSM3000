@@ -54,3 +54,7 @@ void Table::setDiners(int number) {
 bool Table::getDiners() {
 	return _numberOfDiners;
 };
+
+std::string Table::getSeatingType(){
+    return "table";
+}
