@@ -366,3 +366,4 @@ FodyWeavers.xsd
 # Qt files
 **/compile_commands.json
 **/CMakeLists.txt
+/build-RSM3000-Desktop_Qt_5_15_2_MinGW_64_bit-Debug
