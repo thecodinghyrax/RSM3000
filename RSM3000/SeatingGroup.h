@@ -1,4 +1,6 @@
 #include <string>
+#include <iostream>
+
 #pragma once
 class SeatingGroup
 {
@@ -25,5 +27,8 @@ public:
 	virtual bool getDiners() = 0;
 
     virtual std::string getSeatingType() = 0;
+
+	static int promptForInt(std::string itemName);
+	static std::string promptForSeatType();
 };
 
