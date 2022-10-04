@@ -27,6 +27,9 @@
     <ClCompile Include="Bar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SeatingGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SeatingGroup.h">

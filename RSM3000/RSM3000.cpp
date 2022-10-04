@@ -16,6 +16,8 @@ int main()
 {
     string input;
     vector<SeatingGroup*> seating;
+    int partySize = 0;
+    std::string prefType;
 
 
     // Default seating for testing
@@ -46,29 +48,10 @@ int main()
         cin >> input;
 
         if (input == "1"){
-            cout << "Enter the party size: ";
-            cin >> input;
-            //TODO: Validate input is an integer larger than 1
-            int partySize = stoi(input);
-            cout << "Enter the preferred table type. T for table, B for booth, R for bar, or N for no preference: ";
-            cin >> input;
-            while (input != "t" && input != "T" && input != "b"
-                   && input != "B" && input != "r" && input != "R"
-                   && input != "n" && input != "N"){ //TODO: Better way to code this?
-                cout << "Invalid input. Please enter T for table, B for booth, R for bar, or N for no preference: ";
-                cin >> input;
-            }
-            string prefType;
-            if (input == "t" || input == "T"){
-                prefType = "table";
-            } else if (input == "b" || input == "B"){
-                prefType = "booth";
-            } else if (input == "r" || input == "R"){
-                prefType = "bar";
-            } else if (input == "n" || input == "N"){
-                prefType = "np";
-            }
 
+            partySize = SeatingGroup::promptForInt("party size");
+
+            prefType = SeatingGroup::promptForSeatType();
 
             int tableIndex = getSeatingRec(seating, prefType, partySize);
             if (tableIndex > -1){
