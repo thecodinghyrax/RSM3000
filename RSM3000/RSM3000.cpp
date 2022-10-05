@@ -2,10 +2,13 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <list>
+#include <iterator>
 #include "SeatingGroup.h"
 #include "Bar.h"
 #include "Booth.h"
 #include "Table.h"
+#include "WaitingArea.h"
 
 using namespace std;
 
@@ -16,8 +19,10 @@ int main()
 {
     string input;
     vector<SeatingGroup*> seating;
+    list<string> waiting;
     int partySize = 0;
     std::string prefType;
+    string name;
 
 
     // Default seating for testing
@@ -42,6 +47,9 @@ int main()
 
     while (input != "9"){
         cout << "1. Seat a party" << endl;
+        cout << "2. View waiting area" << endl;
+        cout << "   3. Enter party into waiting area" << endl;
+        cout << "   4. Remove first party from waiting area" << endl;
         cout << "9. Quit" << endl;
 
         cout << endl << "Select an option: ";
@@ -82,6 +90,7 @@ int main()
                             count++;
                         }
                         bool validInput = false;
+                        cout << "Select an option: ";
                         while (!validInput){
                             cin >> input;
                             try {
@@ -101,12 +110,62 @@ int main()
                         cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << endl;
                     } else { // If getNumOpenSeating is 0
                         cout << "All tables are currently occupied." << endl;
+
+                        cout << "Enter the party into the waiting area? [y = yes, n = no]: ";
+                        cin >> input;
+                        while (input != "y" && input != "Y" && input != "n" && input != "N"){
+                            cout << "Invalid input. Enter the party into the waiting area? [y = yes, n = no]: ";
+                            cin >> input;
+                        }
+
+                        if (input == "y" || input == "Y") {
+                            name = WaitingArea::promptForName();
+                            string pSize = to_string(partySize);
+                            string fullString = "Party Name: " + name + ", Party Size: " + pSize;
+
+                            waiting.push_back(fullString);
+
+                            cout << "Successfully placed party in waiting area" << endl;
+                        }
                     }
                 }
             } else { // No tables found, send back to menu to re-enter party or clear tables
                 cout << "No tables found, party size might be too big or the restaurant is full." << endl;
             }
 
+        }
+        else if (input == "2") {
+            cout << "entering two" << endl;
+            cout << waiting.size() << endl;
+            int counter = 1;
+            cout << endl;
+            for (auto const &n : waiting) {
+                cout << counter << ". " << n << endl;
+                counter++;
+            }
+            cout << endl;
+            cout << "leaving two" << endl;
+
+        }
+        else if (input == "3") {
+            name = WaitingArea::promptForName();
+            partySize = SeatingGroup::promptForInt("party size");
+            string pSize = to_string(partySize);
+            string fullString = "Party Name: " + name + ", Party Size: " + pSize;
+
+            waiting.push_back(fullString);
+
+            cout << "Successfully placed party in waiting area" << endl;
+        }
+        else if (input == "4") {
+            if (!waiting.empty()) {
+
+                waiting.pop_front();
+                cout << "Successfully removed first party from waiting area: " << endl;
+            }
+            else {
+                cout << "Waiting area is empty" << endl;
+            }
         }
 
     }
