@@ -1,14 +1,12 @@
 #ifndef WAITINGAREA_H
 #define WAITINGAREA_H
 #include "SeatingGroup.h"
-//#include <list>
-//#include <iterator>
 
 class WaitingArea : public SeatingGroup {
 protected:
   std::string dinerName;
   int partyNumber;
-//  std::list<SeatingGroup*> waiting;
+
 public:
   WaitingArea();
   WaitingArea(std::string name, int num);
@@ -39,8 +37,6 @@ public:
 
   static std::string promptForName();
   static bool isNumber(std::string str);
-
-  //void partyIntoWaiting(std::string, int);
 
 };
 
