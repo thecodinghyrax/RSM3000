@@ -68,15 +68,15 @@ int main()
 
                 cout << "The party should be seated at " << tableType << " " << tableNumber << ". Enter Y to confirm, or N to manually select a table: ";
                 cin >> input;
-                while (input != "y" && input != "Y" && input != "n" && input != "N"){
+                while (tolower(input[0]) != 'y' && tolower(input[0]) != 'n') {
                     cout << "Invalid input. Please enter Y to confirm table " << tableNumber << ", or N to manually select a table: ";
                     cin >> input;
                 }
-                if (input == "y" || input == "Y"){
+                if (tolower(input[0]) == 'y') {
                     seating[tableIndex]->setOccupied(true);
                     cout << "Party sucessfully seated at table " << tableNumber << endl;
                 }
-                if (input == "n" || input == "N"){
+                if (tolower(input[0]) == 'n') {
                     // Check if there are open seats, if not go back to the menu
                     if (getNumOpenSeating(seating) > 0){
                         cout << "All availiable tables: " << endl;
@@ -118,7 +118,7 @@ int main()
                             cin >> input;
                         }
 
-                        if (input == "y" || input == "Y") {
+                        if (tolower(input[0]) == 'y') {
                             name = WaitingArea::promptForName();
                             string pSize = to_string(partySize);
                             string fullString = "Party Name: " + name + ", Party Size: " + pSize;
@@ -160,8 +160,8 @@ int main()
         else if (input == "4") {
             if (!waiting.empty()) {
 
+                cout << waiting.front() << " is now ready to be seated." << endl;
                 waiting.pop_front();
-                cout << "Successfully removed first party from waiting area: " << endl;
             }
             else {
                 cout << "Waiting area is empty" << endl;

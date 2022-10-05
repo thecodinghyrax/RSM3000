@@ -132,12 +132,14 @@
     <ClCompile Include="RSM3000.cpp" />
     <ClCompile Include="SeatingGroup.cpp" />
     <ClCompile Include="Table.cpp" />
+    <ClCompile Include="WaitingArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bar.h" />
     <ClInclude Include="Booth.h" />
     <ClInclude Include="SeatingGroup.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="WaitingArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
