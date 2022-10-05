@@ -87,7 +87,3 @@ std::string WaitingArea::promptForName() {
 
     return nameInput;
 }
-
-//void WaitingArea::partyIntoWaiting(std::string name, int dinerNumber) {
-
-//}
