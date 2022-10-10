@@ -27,7 +27,7 @@ public:
   std::string getSeatingType();
 
   void setDiners(int number);
-  bool getDiners();
+  int getDiners();
 
   void setDinerName(std::string name);
   std::string getDinerName();
@@ -37,6 +37,8 @@ public:
 
   static std::string promptForName();
   static bool isNumber(std::string str);
+
+  void removeDiners();
 
 };
 

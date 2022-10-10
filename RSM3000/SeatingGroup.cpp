@@ -13,7 +13,12 @@ int SeatingGroup::promptForInt(std::string itemName) {
             std::cout << "That is not a valid " << itemName << ". Please try again." << std::endl;
         }
         else {
-            validInput = true;
+            if (userTemp > 0) {
+                validInput = true;
+            }
+            else {
+                std::cout << "Must be greater than 0." << std::endl;
+            }
         }
     }
 

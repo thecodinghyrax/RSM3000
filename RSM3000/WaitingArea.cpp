@@ -45,7 +45,7 @@ std::string WaitingArea::getSeatingType(){
 void WaitingArea::setDiners(int number) {
   _numberOfDiners = number;
 }
-bool WaitingArea::getDiners() {
+int WaitingArea::getDiners() {
   return _numberOfDiners;
 }
 
@@ -88,3 +88,7 @@ std::string WaitingArea::promptForName() {
 
     return nameInput;
 }
+
+void WaitingArea::removeDiners() {
+    throw "Not implemented";
+};

@@ -1,4 +1,17 @@
 #include "Bar.h"
+
+// Private
+
+void Bar::setCapacity(int capacity) {
+	_capacity = capacity;
+};
+
+void Bar::setOccupied(bool occupied) {
+	_occupied = occupied;
+};
+
+
+// Public
 Bar::Bar() {
 	setTableNumber(301);
 	setCapacity(30);
@@ -26,10 +39,6 @@ void Bar::setTableNumber(int tableNumber) {
 int Bar::getTableNumber() {
 	return _tableNumber;
 };
-
-void Bar::setCapacity(int capacity) {
-	_capacity = capacity;
-};
 int Bar::getCapacity() {
 	return _capacity;
 };
@@ -40,22 +49,36 @@ void Bar::setTimeSeated(std::string time) {
 std::string Bar::getTimeSeated() {
 	return _timeSeated;
 };
-
-void Bar::setOccupied(bool occupied) {
-	_occupied = occupied;
-};
 bool Bar::getOccupied() {
 	return _occupied;
 };
 
 void Bar::setDiners(int number) {
-	_numberOfDiners = number;
+	if (number > getCapacity()) {
+		throw "The bar is too full to seat this many diners";
+	}
+	else if(number == getCapacity()) {
+			setOccupied(true);
+			_numberOfDiners = number;
+		}
+	else if( number < getCapacity()) {
+		setOccupied(false);
+		_numberOfDiners = number;
+	}
+	else {
+		setOccupied(false);
+		_numberOfDiners = number;
+	}
 };
-bool Bar::getDiners() {
+int Bar::getDiners() {
 	return _numberOfDiners;
 };
 
 std::string Bar::getSeatingType(){
     return "bar";
 }
+
+void Bar::removeDiners() {
+	throw "Not implemented";
+};
 

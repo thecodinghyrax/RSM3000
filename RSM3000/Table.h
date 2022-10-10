@@ -3,6 +3,9 @@
 class Table :
     public SeatingGroup
 {
+private:
+	void setCapacity(int capacity);
+	void setOccupied(bool occupied);
 
 public:
 	Table();
@@ -13,18 +16,18 @@ public:
 	void setTableNumber(int tableNumber);
 	int getTableNumber();
 
-	void setCapacity(int capacity);
-	int getCapacity();
-
 	void setTimeSeated(std::string time);
 	std::string getTimeSeated();
 
-	void setOccupied(bool occupied);
+	void setDiners(int number);
+	int getDiners();
+
+	int getCapacity();
+
 	bool getOccupied();
 
-	void setDiners(int number);
-	bool getDiners();
-
     std::string getSeatingType();
+
+	void removeDiners();
 };
 
