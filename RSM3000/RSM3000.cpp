@@ -47,9 +47,11 @@ int main()
     while (input != "9"){
         cout << endl <<"1. Seat a party" << endl;
         cout << "2. View waiting area" << endl;
-        cout << "   3. Enter party into waiting area" << endl;
-        cout << "   4. Remove first party from waiting area" << endl;
+        cout << "3. Enter party into waiting area" << endl;
+        cout << "4. Remove first party from waiting area" << endl;
         cout << "5. Remove Diners (clear a booth, table or bar seat)" << endl;
+        cout << "6. Set Seating Capacity" << endl;
+        cout << "7. Check Occupancy of Resturant" << endl;
         cout << "9. Quit" << endl;
 
         cout << endl << "Select an option: ";
