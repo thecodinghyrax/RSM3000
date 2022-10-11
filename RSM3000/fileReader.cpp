@@ -81,7 +81,7 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
     while (getline (myFile, line)){
         std::vector<char> lineVector = {};
 
-        for (unsigned i = 0; i < line.size(); i++){
+        for (int i = 0; i < line.size(); i++){
             lineVector.push_back(line[i]);
             if (isdigit(line[i])){
                 eatingSpaces += 1;
@@ -108,28 +108,32 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
     std::string outputString;
 
     //creates string from file
-    for(unsigned i = 0; i < paragraphVector.size(); i++){
-        for (unsigned j = 0; j < paragraphVector[i].size();j++){
+    for(int i = 0; i < paragraphVector.size(); i++){
+        for (int j = 0; j < paragraphVector[i].size();j++){
             outputString += paragraphVector[i][j];
         }
         outputString += "\n";
     }
 
-    std::pair<char, int>seatingGroupData;
+    // TODO - Can this be removed?
+    //std::pair<char, int>seatingGroupData;
 
     std::vector<std::pair<char, char>>seatingGroupDataStorage;
 
     //creates vector that stores each seating group with type and capacity
-    for (unsigned i = 0; i < outputString.size(); i++){
+    for (int i = 0; i < outputString.size(); i++){
         switch (outputString[i]){
             case 'b':
-                seatingGroupDataStorage.push_back(std::pair('b',findCapacity(outputString, i, line.size())));
+                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
+                seatingGroupDataStorage.push_back(std::make_pair('b',findCapacity(outputString, i, line.size())));
                 break;
             case 'r':
-                seatingGroupDataStorage.push_back(std::pair('r',findCapacity(outputString, i, line.size())));
+                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
+                seatingGroupDataStorage.push_back(std::make_pair('r',findCapacity(outputString, i, line.size())));
                 break;
             case 't':
-                seatingGroupDataStorage.push_back(std::pair('t',findCapacity(outputString, i, line.size())));   
+                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
+                seatingGroupDataStorage.push_back(std::make_pair('t',findCapacity(outputString, i, line.size())));
                 break;
             default:
                 break;
@@ -138,18 +142,19 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
     //sorts seating groups
     std::sort(seatingGroupDataStorage.begin(), seatingGroupDataStorage.end());
 
-    int t1Count, t2Count, t3Count, t4Count, t5Count,  t6Count, t7Count, t8Count, t9Count,
-    r1Count, r2Count, r3Count, r4Count, r5Count,  r6Count, r7Count, r8Count, r9Count,
-    b1Count, b2Count, b3Count, b4Count, b5Count,  b6Count, b7Count, b8Count, b9Count = 0;
+    //TODO - Can these be removed?
+    //int t1Count, t2Count, t3Count, t4Count, t5Count,  t6Count, t7Count, t8Count, t9Count,
+    //r1Count, r2Count, r3Count, r4Count, r5Count,  r6Count, r7Count, r8Count, r9Count,
+    //b1Count, b2Count, b3Count, b4Count, b5Count,  b6Count, b7Count, b8Count, b9Count = 0;
 
     //creates array to keep track of number of seating groups with the same capacity (ex. 2 tables of 4)
     std::array<std::pair<int, char>, 27>seatingGroupCount; //0-8 is booth, 9-17 is bar, 18-26 is table
-    for (unsigned i=0; i < seatingGroupCount.size(); i++){
-        seatingGroupCount[i] = std::pair(0, '0');
+    for (int i=0; i < seatingGroupCount.size(); i++){
+        seatingGroupCount[i] = std::make_pair(0, '0');
     }
 
     //updates array based on seating groups stores
-    for (unsigned i = 0; i < seatingGroupDataStorage.size(); i++){
+    for (int i = 0; i < seatingGroupDataStorage.size(); i++){
         //booth
         if (seatingGroupDataStorage[i].first == 'b'){
             switch (seatingGroupDataStorage[i].second-'0')
@@ -283,27 +288,27 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
     }
 
     //adds new seating groups from file to main seating vector
-    for (unsigned i = 0; i < seatingGroupCount.size(); i++){
+    for (int i = 0; i < seatingGroupCount.size(); i++){
         if (seatingGroupCount[i].second != '0'){
             int groups = seatingGroupCount[i].first / (seatingGroupCount[i].second-'0');
             if (i < 9){
-                for (unsigned j = 0; j < groups; j++){
+                for (int j = 0; j < groups; j++){
                     vectorToAddTo.push_back(new Booth(getHighestSeatingNo(vectorToAddTo)+1, seatingGroupCount[i].second-'0'));
                 }
             }
             else if (i < 18){
-                for (unsigned j = 0; j < groups; j++){
+                for (int j = 0; j < groups; j++){
                     vectorToAddTo.push_back(new Bar(getHighestSeatingNo(vectorToAddTo)+1, seatingGroupCount[i].second-'0'));
                 }
             }
             else {
-                for (unsigned j = 0; j < groups; j++){
+                for (int j = 0; j < groups; j++){
                     vectorToAddTo.push_back(new Table(getHighestSeatingNo(vectorToAddTo)+1, seatingGroupCount[i].second-'0'));
                 }
             }
         }
     }
-    
+    return std::vector<SeatingGroup*>{}; // TODO - this will need to be changed (a return is required)
 }
 
 
