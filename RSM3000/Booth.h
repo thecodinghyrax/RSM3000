@@ -3,11 +3,10 @@
 class Booth :
     public SeatingGroup
 {
-//private:
-//	int _capacity;
-//	int _seatingSection;
-//	std::string _timeSeated;
-//	bool _occupied;
+private:
+	void setCapacity(int capacity) override;
+	void setOccupied(bool occupied) override;
+
 public:
 	Booth();
 	Booth(int tableNumber);
@@ -17,18 +16,18 @@ public:
 	void setTableNumber(int tableNumber) override;
 	int getTableNumber() override;
 
-	void setCapacity(int capacity) override;
-	int getCapacity() override;
-
 	void setTimeSeated(std::string time) override;
 	std::string getTimeSeated() override;
 
-	void setOccupied(bool occupied) override;
+	void setDiners(int number) override;
+	int getDiners();
+
+	int getCapacity() override;
+
 	bool getOccupied() override;
 
-	void setDiners(int number) override;
-	bool getDiners();
-
     std::string getSeatingType();
+
+	void removeDiners();
 };
 

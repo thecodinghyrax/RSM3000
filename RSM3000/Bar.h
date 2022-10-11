@@ -3,6 +3,10 @@
 class Bar :
 	public SeatingGroup
 {
+private:
+	void setCapacity(int capacity);
+	void setOccupied(bool occupied);
+
 public:
 	Bar();
 	Bar(int tableNumber);
@@ -12,17 +16,20 @@ public:
 	void setTableNumber(int tableNumber);
 	int getTableNumber();
 
-	void setCapacity(int capacity);
-	int getCapacity();
-
 	void setTimeSeated(std::string time);
 	std::string getTimeSeated();
 
-	void setOccupied(bool occupied);
-	bool getOccupied();
 
 	void setDiners(int number);
-	bool getDiners();
+	int getDiners();
 
     std::string getSeatingType();
+
+	int getCapacity();
+
+	bool getOccupied();
+
+	void removeDiners();
+
+	void removeDiners(int numDiners);
 };

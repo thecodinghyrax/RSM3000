@@ -14,6 +14,7 @@ using namespace std;
 
 int getSeatingRec(vector<SeatingGroup*> seating, string seatingType, int partySize);
 int getNumOpenSeating (vector<SeatingGroup*> seating);
+void removeFromBar(SeatingGroup& bar);
 
 int main()
 {
@@ -29,8 +30,7 @@ int main()
     Booth b = Booth();
     Booth b2 = Booth(204,4);
     Booth b3 = Booth(205,5);
-    Bar r1 = Bar(300,2);
-    Bar r2 = Bar(301,3);
+    Bar r1 = Bar(300,30);
     Table t1 = Table(400);
     Table t2 = Table(401,6);
     Table t3 = Table(410,8);
@@ -38,7 +38,6 @@ int main()
     seating.push_back(&b2);
     seating.push_back(&b3);
     seating.push_back(&r1);
-    seating.push_back(&r2);
     seating.push_back(&t1);
     seating.push_back(&t2);
     seating.push_back(&t3);
@@ -46,10 +45,11 @@ int main()
     cout << "Restaurant Seating Manager 3000 Menu" << endl;
 
     while (input != "9"){
-        cout << "1. Seat a party" << endl;
+        cout << endl <<"1. Seat a party" << endl;
         cout << "2. View waiting area" << endl;
         cout << "   3. Enter party into waiting area" << endl;
         cout << "   4. Remove first party from waiting area" << endl;
+        cout << "5. Remove Diners (clear a booth, table or bar seat)" << endl;
         cout << "9. Quit" << endl;
 
         cout << endl << "Select an option: ";
@@ -73,7 +73,8 @@ int main()
                     cin >> input;
                 }
                 if (tolower(input[0]) == 'y') {
-                    seating[tableIndex]->setOccupied(true);
+                    //seating[tableIndex]->setOccupied(true);
+                    seating[tableIndex]->setDiners(partySize);
                     cout << "Party sucessfully seated at table " << tableNumber << endl;
                 }
                 if (tolower(input[0]) == 'n') {
@@ -90,24 +91,37 @@ int main()
                             count++;
                         }
                         bool validInput = false;
-                        cout << "Select an option: ";
+                        cout << "Select an option (-1 to exit): ";
                         while (!validInput){
                             cin >> input;
                             try {
-                            tableIndex = stoi(input);
-                            // Validate index input
-                            if (tableIndex >= 0 && tableIndex < seating.size()){
-                                validInput = true;
-                            } else {
-                                cout << "Invalid input, please re-enter: ";
-                            }
+                                tableIndex = stoi(input);
+                                // Validate index input
+                                if (tableIndex == -1) {
+                                    validInput = true;
+                                }
+                                else if (seating[tableIndex]->getCapacity() >= partySize) {
+                                    cout << endl << endl << "Party is larger than the selected seating area. Please try again." << endl;
+                                }
+                                else if (tableIndex >= 0) {
+                                    validInput = true;
+                                } else {
+                                    cout << "Invalid input, please re-enter: ";
+                                }
                             } catch (exception e){
                                 cout << "Invalid input, please re-enter: ";
                             }
                         }
-
-                        seating[tableIndex]->setOccupied(true);
-                        cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << endl;
+                        if (tableIndex == -1) {
+                            cout << "Returning to the main menu."<< endl;
+                        }
+                        else if (seating[tableIndex]->getCapacity() < partySize) {
+                            cout << "Party size is too large for this seating area." << endl;
+                        }
+                        else {
+                            seating[tableIndex]->setDiners(partySize);
+                            cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << endl;
+                        }
                     } else { // If getNumOpenSeating is 0
                         cout << "All tables are currently occupied." << endl;
 
@@ -165,6 +179,55 @@ int main()
             }
             else {
                 cout << "Waiting area is empty" << endl;
+            }
+        }
+        // Remove diners from seats
+        else if (input == "5") {
+            bool anyOccupied = false;
+            bool removed = false;
+            int seatSelection;
+            cout << "What would you like to clear? (-1 to exit)" << endl;
+            for (int i = 0; i < seating.size(); ++i) {
+                if (seating.at(i)->getOccupied() == 1 || 
+                    (seating.at(i)->getSeatingType() == "bar" && seating.at(i)->getDiners() > 0)) { // bar is not occupied until full
+                    cout << seating.at(i)->getTableNumber() << " - ";
+                    cout << seating.at(i)->getSeatingType() << " - ";
+                    cout << seating.at(i)->getDiners() << " diners" << endl;
+                    anyOccupied = true;
+                }
+            }
+            if (!anyOccupied) {
+                cout << endl << "No diners have been seated yet." << endl << endl;
+            }
+            else 
+            {
+                cout << endl;
+                seatSelection = SeatingGroup::promptForInt("seat number");
+
+                for (int i = 0; i < seating.size(); ++i) {
+                    if (seating.at(i)->getTableNumber() == seatSelection) {
+                        if (seating.at(i)->getSeatingType() == "bar") {
+                            removeFromBar(*seating.at(i));
+                        }
+                        else {
+                            seating.at(i)->setDiners(0);
+                            removed = true;
+                        }
+                    }
+                }
+                if (!removed) {
+                    if (seatSelection == -1) {
+                        cout << endl << "Exiting to main menu" << endl << endl;
+                    }
+                    else {
+                        cout << endl << "That was not a valid seating number." << endl << endl;
+                    }
+
+                }
+                else {
+                    cout << endl << "Seat " << seatSelection << " has been cleared." << endl << endl;
+                }
+
             }
         }
 
@@ -235,4 +298,19 @@ int getNumOpenSeating (vector<SeatingGroup*> seating){
         }
     }
     return numOpen;
+}
+
+void removeFromBar(SeatingGroup& bar) {
+    bool valid = false;
+    while (!valid) {
+        int dinersToRemove = SeatingGroup::promptForInt("a number of diners to remove");
+        if (dinersToRemove > 0 && dinersToRemove <= bar.getDiners()) {
+            bar.setDiners((bar.getDiners() - dinersToRemove));
+            valid = true;
+        }
+        else {
+            cout << "That is an invalid number to remove. Currently there are " << bar.getDiners() << " seated at the bar" << endl;
+        }
+    }
+
 }
