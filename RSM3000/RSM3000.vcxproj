@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Booth.cpp" />
+    <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="RSM3000.cpp" />
     <ClCompile Include="SeatingGroup.cpp" />
     <ClCompile Include="Table.cpp" />
@@ -140,6 +141,9 @@
     <ClInclude Include="SeatingGroup.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="WaitingArea.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="exampleSeatingChart.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
