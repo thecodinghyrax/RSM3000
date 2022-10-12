@@ -76,13 +76,13 @@ bool WaitingArea::isNumber(std::string str) {
 std::string WaitingArea::promptForName() {
     std::string nameInput = "";
 
-    std::cout << "Please enter the name of a diner: " << std::endl;
+    std::cout << "Please enter the name of a diner in the party: " << std::endl;
     std::cin.ignore();
     std::getline(std::cin, nameInput);
 
     while (isNumber(nameInput)) {
         std::cout << "Invalid Input - Entry cannot be a number" << std::endl;
-        std::cout << "Please enter the name of a diner: " << std::endl;
+        std::cout << "Please enter the name of a diner in the party: " << std::endl;
         std::cin >> nameInput;
     }
 
