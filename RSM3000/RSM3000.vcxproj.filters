@@ -33,6 +33,9 @@
     <ClCompile Include="WaitingArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="csvReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
