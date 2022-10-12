@@ -322,83 +322,21 @@ void Menu::removeDiners(std::vector<SeatingGroup*>& seating) { // Option 5
 
 /**************************************************************
 * Method Name: createSeatingConfig
-* Description: Creates seating for all tables and defines capacity 
+* Description: 
 * Input: vector<SeatingGroup*>/all configured seats
-* Output: Total Capacity
+* Output: none
 ***************************************************************/
-void Menu::createSeatingConfig(std::vector<SeatingGroup*>&seating,) {
-
-     int tables;
-    int tableSeating;
-    int  booths;
-    int boothSeating;
-    int barSeating;
-    int barTables;
-    int  totalCapacity;
-
-    std::cout<<"Enter amount of Tables available"<<std::endl;
-    tables = Table::setTableNumber(int& tableNumber){
-        std::cin>>tableNumber;
-    }  
-        std::cout<<endl;
-    
-    std::cout<<"Enter amount of seating available at each Table"<<std::endl;
-     tableSeating = Table::setCapacity(int& capacity){
-        std::cin>>capacity; }
-        std::cout<<endl;
-     
-    
-    std::cout<<"Enter amount of Booths available"<<std::endl;
-        booths = Booth::setTableNumber(int& tableNumber){
-    std::cin>>tableNumber; }
-        std::cout<<endl;
-            
-    
-    std::cout<<"Enter amount of seating avaiable in each Booth"<<std::endl;
-    boothSeating = Booth::setCapacity(int& capacity){
-      std::cin>>capacity;  }
-    std::cout<<endl;
-    
-
-    std::cout<<"Enter amount of Tables available at the Bar"<<std::endl;
-    barTables = Bar::tableNumber(int& tableNumber){
-        std::cin>>tableNumber; }
-        std::cout<<endl;
-    
-    barSeating = Bar::setCapacity(int& capacity){
-    std::cin>>capacity}
-    std::cout<<std::endl;
-
-    tableSeating = tables*tableSeating;
-
-    boothSeating = booths*boothSeating;
-
-    std::cout<<"Total Capacity with all Tables: "<<Table::getCapacity()<<endl;
-    std::cout<<"Total Capacity with all Booths: "<<Booth::getCapacity<<endl;
-    std::cout<<"Total Bar Capacity: "<<Bar::getCapacity()<<endl;
-    std::cout<<std::endl;
-
-    totalCapacity = tableSeating + boothSeating + barSeating;
-    cout<<"Total Resturant Seating Capacity: "<<totalCapacity<<endl;
+void Menu::createSeatingConfig(std::vector<SeatingGroup*>&) {
+    throw "Not implemented";
 };
 
 /**************************************************************
 * Method Name: currentOccupancy
-* Description: Displays all currently occupied tables
+* Description: 
 * Input: vector<SeatingGroup*>/all configured seats
-* Output: Occupied Tables
+* Output: none
 ***************************************************************/
-void Menu::currentOccupancy(std::vector<SeatingGroup*>&seating) {
-     bool anyOccupied = false;
-     for (int i = 0; i < seating.size(); ++i) {
-        if (seating.at(i)->getOccupied() == 1 ||
-            (seating.at(i)->getSeatingType() == "bar" && seating.at(i)->getDiners() > 0)) { 
-            std::cout << seating.at(i)->getTableNumber() << " - ";
-            std::cout << seating.at(i)->getSeatingType() << " - ";
-            std::cout << seating.at(i)->getDiners() << " diners" << std::endl;
-            anyOccupied = true;
-            
-             if (!anyOccupied) {
-        std::cout << std::endl << "No Tables Currently Occupied" << std::endl << std::endl;
+void Menu::currentOccupancy(std::vector<SeatingGroup*>&) {
+    throw "Not implemented";
 };
 
