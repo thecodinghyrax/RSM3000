@@ -32,7 +32,7 @@ public:
 
 	virtual void removeDiners() = 0;
 
-	static int promptForInt(std::string itemName);
+    static int promptForInt(std::string itemName, bool quitOption);
 	static std::string promptForSeatType();
 };
 

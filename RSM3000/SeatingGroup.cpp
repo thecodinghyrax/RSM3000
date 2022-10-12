@@ -1,6 +1,6 @@
 #include "SeatingGroup.h"
 
-int SeatingGroup::promptForInt(std::string itemName) {
+int SeatingGroup::promptForInt(std::string itemName, bool quitOption) {
     int userTemp;
     bool validInput = false;
 
@@ -15,6 +15,9 @@ int SeatingGroup::promptForInt(std::string itemName) {
         else {
             if (userTemp > 0) {
                 validInput = true;
+            // If quitOption is true, -1 is a valid input in order to quit the current menu
+            } else if (quitOption == true && userTemp == -1){
+                return -1;
             }
             else {
                 std::cout << "Must be greater than 0." << std::endl;
