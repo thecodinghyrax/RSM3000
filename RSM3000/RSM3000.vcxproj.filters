@@ -33,10 +33,10 @@
     <ClCompile Include="WaitingArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="csvReader.cpp">
+    <ClCompile Include="CSVReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fileReader.cpp">
+    <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -60,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

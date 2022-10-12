@@ -5,10 +5,10 @@
 class SeatingGroup
 {
 protected:
-	int _tableNumber;
-	int _capacity;
-	int _numberOfDiners;
-	std::string _timeSeated;
+	int _tableNumber = 0;
+	int _capacity = 0;
+	int _numberOfDiners = 0;
+	std::string _timeSeated = "";
 	bool _occupied;
 
 	virtual void setOccupied(bool occupied) = 0;

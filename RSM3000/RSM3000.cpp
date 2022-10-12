@@ -10,39 +10,37 @@
 #include "Table.h"
 #include "WaitingArea.h"
 #include "Menu.h"
+#include "CSVReader.h"
 
 using namespace std;
 
 
 int main()
 {
-    string input;
     vector<SeatingGroup*> seating;
     list<string> waiting;
-    int partySize = 0;
-    std::string prefType;
-    string name;
+    string input;
 
 
     // Default seating for testing
-    Booth b = Booth();
-    Booth b2 = Booth(204,4);
-    Booth b3 = Booth(205,5);
-    Bar r1 = Bar(300,30);
-    Table t1 = Table(400);
-    Table t2 = Table(401,6);
-    Table t3 = Table(410,8);
-    seating.push_back(&b);
-    seating.push_back(&b2);
-    seating.push_back(&b3);
-    seating.push_back(&r1);
-    seating.push_back(&t1);
-    seating.push_back(&t2);
-    seating.push_back(&t3);
+    //Booth b = Booth();
+    //Booth b2 = Booth(204,4);
+    //Booth b3 = Booth(205,5);
+    //Bar r1 = Bar(300,30);
+    //Table t1 = Table(400);
+    //Table t2 = Table(401,6);
+    //Table t3 = Table(410,8);
+    //seating.push_back(&b);
+    //seating.push_back(&b2);
+    //seating.push_back(&b3);
+    //seating.push_back(&r1);
+    //seating.push_back(&t1);
+    //seating.push_back(&t2);
+    //seating.push_back(&t3);
 
     cout << "Restaurant Seating Manager 3000 Menu" << endl;
 
-    while (input != "9"){
+    while (input != "10"){
         cout << endl <<"1. Seat a party" << endl;
         cout << "2. View waiting area" << endl;
         cout << "3. Enter party into waiting area" << endl;
@@ -50,7 +48,9 @@ int main()
         cout << "5. Remove Diners (clear a booth, table or bar seat)" << endl;
         cout << "6. Set Seating Capacity" << endl;
         cout << "7. Check Occupancy of Resturant" << endl;
-        cout << "9. Quit" << endl;
+        cout << "8. Load a previous seating configuration" << endl;
+        cout << "9. Save the current seating configuration" << endl;
+        cout << "10. Quit" << endl;
 
         cout << endl << "Select an option: ";
         cin >> input;
@@ -67,7 +67,6 @@ int main()
         else if (input == "4") {
             Menu::removeWaiting(waiting);
         }
-        // Remove diners from seats
         else if (input == "5") {
             Menu::removeDiners(seating);
         }
@@ -76,6 +75,12 @@ int main()
         }
         else if (input == "7") {
             Menu::currentOccupancy(seating);
+        }
+        else if (input == "8") {
+            CSVReader::readCSV(seating);
+        }
+        else if (input == "9") {
+            CSVReader::createCSV(seating);
         }
 
     }
