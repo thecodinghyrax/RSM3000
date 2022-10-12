@@ -14,7 +14,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     if (seatingType != "np") {
         // First phase, checks for perfect match
         for (auto& s : seating) {
-            if (!s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType) {
+            if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType) {
                 match = count;
             }
             count++;
@@ -25,7 +25,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
         // Second phase, checks for same type but larger capacity than party size
         count = 0;
         for (auto& s : seating) {
-            if (!s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType) {
+            if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType) {
                 match = count;
             }
             count++;
@@ -37,7 +37,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     // Third phase, find table of different type of same capacity
     count = 0;
     for (auto& s : seating) {
-        if (!s->getOccupied() && s->getCapacity() == partySize) {
+        if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() == partySize) {
             match = count;
         }
         count++;
@@ -48,7 +48,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     // Fourth phase, find table of any type and larger capacity
     count = 0;
     for (auto& s : seating) {
-        if (!s->getOccupied() && s->getCapacity() > partySize) {
+        if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() > partySize) {
             match = count;
         }
         count++;
@@ -127,8 +127,13 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
         }
         if (tolower(input[0]) == 'y') {
             //seating[tableIndex]->setOccupied(true);
-            seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
-            std::cout << "Party sucessfully seated at " << tableType << " " << tableNumber << std::endl;
+            if (seating[tableIndex]->partyWillFit(partySize)){
+                seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
+                std::cout << "Party sucessfully seated at " << tableType << " " << tableNumber << std::endl;
+            } else {
+                std::cout << "Party was too big to seat at this table." << std::endl;
+            }
+
         }
         if (tolower(input[0]) == 'n') {
             // Check if there are open seats, if not go back to the menu
@@ -137,7 +142,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                 int count = 0;
                 // List each table and its index
                 for (auto& s : seating) {
-                    if (!s->getOccupied()) {
+                    if (s->partyWillFit(partySize) && !s->getOccupied()) {
                         std::cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
                             ", seats " << s->getCapacity() << std::endl;
                     }

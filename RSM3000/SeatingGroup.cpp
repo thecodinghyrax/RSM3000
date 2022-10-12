@@ -69,5 +69,5 @@ std::string SeatingGroup::promptForSeatType() {
 }
 
 bool SeatingGroup::partyWillFit(int partySize){
-    return (_capacity - _numberOfDiners) > partySize;
+    return (_capacity - _numberOfDiners) >= partySize;
 }
