@@ -14,7 +14,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     if (seatingType != "np") {
         // First phase, checks for perfect match
         for (auto& s : seating) {
-            if (!s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType) {
+            if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() == partySize && s->getSeatingType() == seatingType) {
                 match = count;
             }
             count++;
@@ -25,7 +25,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
         // Second phase, checks for same type but larger capacity than party size
         count = 0;
         for (auto& s : seating) {
-            if (!s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType) {
+            if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() > partySize && s->getSeatingType() == seatingType) {
                 match = count;
             }
             count++;
@@ -37,7 +37,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     // Third phase, find table of different type of same capacity
     count = 0;
     for (auto& s : seating) {
-        if (!s->getOccupied() && s->getCapacity() == partySize) {
+        if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() == partySize) {
             match = count;
         }
         count++;
@@ -48,7 +48,7 @@ int getSeatingRec(std::vector<SeatingGroup*>& seating, std::string seatingType, 
     // Fourth phase, find table of any type and larger capacity
     count = 0;
     for (auto& s : seating) {
-        if (!s->getOccupied() && s->getCapacity() > partySize) {
+        if (s->partyWillFit(partySize) && !s->getOccupied() && s->getCapacity() > partySize) {
             match = count;
         }
         count++;
@@ -87,7 +87,7 @@ int getNumOpenSeating(std::vector<SeatingGroup*>& seating) {
 void removeFromBar(SeatingGroup& bar) {
     bool valid = false;
     while (!valid) {
-        int dinersToRemove = SeatingGroup::promptForInt("a number of diners to remove");
+        int dinersToRemove = SeatingGroup::promptForInt("a number of diners to remove", false);
         if (dinersToRemove > 0 && dinersToRemove <= bar.getDiners()) {
             bar.setDiners((bar.getDiners() - dinersToRemove));
             valid = true;
@@ -109,7 +109,7 @@ void removeFromBar(SeatingGroup& bar) {
 * Output: none
 ***************************************************************/
 void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>& waiting) { // Option 1
-    int partySize = SeatingGroup::promptForInt("party size");
+    int partySize = SeatingGroup::promptForInt("party size", false);
     std::string prefType = SeatingGroup::promptForSeatType();
     std::string input;
     std::string name;
@@ -127,8 +127,13 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
         }
         if (tolower(input[0]) == 'y') {
             //seating[tableIndex]->setOccupied(true);
-            seating[tableIndex]->setDiners(partySize);
-            std::cout << "Party sucessfully seated at table " << tableNumber << std::endl;
+            if (seating[tableIndex]->partyWillFit(partySize)){
+                seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
+                std::cout << "Party sucessfully seated at " << tableType << " " << tableNumber << std::endl;
+            } else {
+                std::cout << "Party was too big to seat at this table." << std::endl;
+            }
+
         }
         if (tolower(input[0]) == 'n') {
             // Check if there are open seats, if not go back to the menu
@@ -137,7 +142,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                 int count = 0;
                 // List each table and its index
                 for (auto& s : seating) {
-                    if (!s->getOccupied()) {
+                    if (s->partyWillFit(partySize) && !s->getOccupied()) {
                         std::cout << count << ". " << s->getSeatingType() << " " << s->getTableNumber() <<
                             ", seats " << s->getCapacity() << std::endl;
                     }
@@ -153,7 +158,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                         if (tableIndex == -1) {
                             validInput = true;
                         }
-                        else if (seating[tableIndex]->getCapacity() >= partySize) {
+                        else if (seating[tableIndex]->getCapacity() < partySize) {
                             std::cout << std::endl << std::endl << "Party is larger than the selected seating area. Please try again." << std::endl;
                         }
                         else if (tableIndex >= 0) {
@@ -174,8 +179,8 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                     std::cout << "Party size is too large for this seating area." << std::endl;
                 }
                 else {
-                    seating[tableIndex]->setDiners(partySize);
-                    std::cout << "Party sucessfully seated at table " << seating[tableIndex]->getTableNumber() << std::endl;
+                    seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
+                    std::cout << "Party sucessfully seated at " << tableType << " " << seating[tableIndex]->getTableNumber() << std::endl;
                 }
             }
             else { // If getNumOpenSeating is 0
@@ -231,7 +236,7 @@ void Menu::viewWaiting(std::list<std::string>& waiting) { // Option 2
 ***************************************************************/
 void Menu::addToWaiting(std::list<std::string>& waiting) { // Option 3 
     std::string name = WaitingArea::promptForName();
-    int partySize = SeatingGroup::promptForInt("party size");
+    int partySize = SeatingGroup::promptForInt("party size", false);
     std::string pSize = std::to_string(partySize);
     std::string fullString = "Party Name: " + name + ", Party Size: " + pSize;
 
@@ -286,7 +291,7 @@ void Menu::removeDiners(std::vector<SeatingGroup*>& seating) { // Option 5
     else
     {
         std::cout << std::endl;
-        seatSelection = SeatingGroup::promptForInt("seat number");
+        seatSelection = SeatingGroup::promptForInt("seat number", true);
 
         for (int i = 0; i < seating.size(); ++i) {
             if (seating.at(i)->getTableNumber() == seatSelection) {

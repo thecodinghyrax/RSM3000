@@ -1,6 +1,6 @@
 #include "SeatingGroup.h"
 
-int SeatingGroup::promptForInt(std::string itemName) {
+int SeatingGroup::promptForInt(std::string itemName, bool quitOption) {
     int userTemp;
     bool validInput = false;
 
@@ -15,6 +15,9 @@ int SeatingGroup::promptForInt(std::string itemName) {
         else {
             if (userTemp > 0) {
                 validInput = true;
+            // If quitOption is true, -1 is a valid input in order to quit the current menu
+            } else if (quitOption == true && userTemp == -1){
+                return -1;
             }
             else {
                 std::cout << "Must be greater than 0." << std::endl;
@@ -26,7 +29,7 @@ int SeatingGroup::promptForInt(std::string itemName) {
 }
 
 
-std::string retrunTableType(char selection) {
+std::string returnTableType(char selection) {
     switch (tolower(selection)) {
     case 't':
         return "table";
@@ -52,7 +55,7 @@ std::string SeatingGroup::promptForSeatType() {
     while (!valid) {
         std::cout << "Enter the preferred table type. T for table, B for booth, R for bar, or N for no preference: ";
         std::cin >> userInput;
-        tableType = retrunTableType(userInput);
+        tableType = returnTableType(userInput);
         if (tableType != "invalid") {
             valid = true;
         }
@@ -63,4 +66,8 @@ std::string SeatingGroup::promptForSeatType() {
     }
     return tableType;
 
+}
+
+bool SeatingGroup::partyWillFit(int partySize){
+    return (_capacity - _numberOfDiners) >= partySize;
 }
