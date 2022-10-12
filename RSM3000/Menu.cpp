@@ -153,7 +153,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                         if (tableIndex == -1) {
                             validInput = true;
                         }
-                        else if (seating[tableIndex]->getCapacity() >= partySize) {
+                        else if (seating[tableIndex]->getCapacity() < partySize) {
                             std::cout << std::endl << std::endl << "Party is larger than the selected seating area. Please try again." << std::endl;
                         }
                         else if (tableIndex >= 0) {
