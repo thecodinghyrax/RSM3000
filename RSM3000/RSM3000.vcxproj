@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Booth.cpp" />
+    <ClCompile Include="csvReader.cpp" />
     <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="RSM3000.cpp" />
     <ClCompile Include="SeatingGroup.cpp" />
