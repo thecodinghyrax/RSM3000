@@ -1,19 +1,12 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <array>
-#include <algorithm>
-#include "SeatingGroup.h"
-#include "Booth.h"
-#include "Bar.h"
-#include "Table.h"
+#include "CSVReader.h"
 
-void createCSV(std::vector<SeatingGroup*>mainVector){
+void CSVReader::createCSV(std::vector<SeatingGroup*> &mainVector){
     std::string filePath;
 
     std::cout << "Please enter file name" << std::endl;
     std::cin >> filePath;
+
+    filePath += ".csv";
 
     std::fstream myCSV;    
     myCSV.open(filePath, std::ios::out | std::ios::app);
@@ -31,7 +24,7 @@ void createCSV(std::vector<SeatingGroup*>mainVector){
 }
 
 
-void readCSV(std::vector<SeatingGroup*> mainVector){
+void CSVReader::readCSV(std::vector<SeatingGroup*> &mainVector){
     std::vector<std::array<std::string, 3>>tables;
     std::string filePath;
     std::string line;
@@ -84,13 +77,13 @@ void readCSV(std::vector<SeatingGroup*> mainVector){
 
     //Creates new seating group object
     for(int i = 0; i < tables.size(); i++){
-        if (tables[i][0] == "b"){
+        if (tables[i][0][0] == 'b') {
             mainVector.push_back(new Booth(stoi(tables[i][1]), stoi(tables[i][2])));   
         }
-        else if (tables[i][0] == "r"){
+        else if (tables[i][0][0] == 'r') {
             mainVector.push_back(new Bar(stoi(tables[i][1]), stoi(tables[i][2])));  
         }
-        else if (tables[i][0] == "t"){
+        else if (tables[i][0][0] == 't') {
             mainVector.push_back(new Table(stoi(tables[i][1]), stoi(tables[i][2])));  
         }
     }
