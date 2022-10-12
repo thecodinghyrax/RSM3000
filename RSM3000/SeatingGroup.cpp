@@ -67,3 +67,7 @@ std::string SeatingGroup::promptForSeatType() {
     return tableType;
 
 }
+
+bool SeatingGroup::partyWillFit(int partySize){
+    return (_capacity - _numberOfDiners) > partySize;
+}

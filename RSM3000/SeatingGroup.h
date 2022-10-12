@@ -34,5 +34,7 @@ public:
 
     static int promptForInt(std::string itemName, bool quitOption);
 	static std::string promptForSeatType();
+
+    bool partyWillFit(int partySize);
 };
 
