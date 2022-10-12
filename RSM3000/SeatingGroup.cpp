@@ -29,7 +29,7 @@ int SeatingGroup::promptForInt(std::string itemName, bool quitOption) {
 }
 
 
-std::string retrunTableType(char selection) {
+std::string returnTableType(char selection) {
     switch (tolower(selection)) {
     case 't':
         return "table";
@@ -55,7 +55,7 @@ std::string SeatingGroup::promptForSeatType() {
     while (!valid) {
         std::cout << "Enter the preferred table type. T for table, B for booth, R for bar, or N for no preference: ";
         std::cin >> userInput;
-        tableType = retrunTableType(userInput);
+        tableType = returnTableType(userInput);
         if (tableType != "invalid") {
             valid = true;
         }

@@ -127,7 +127,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
         }
         if (tolower(input[0]) == 'y') {
             //seating[tableIndex]->setOccupied(true);
-            seating[tableIndex]->setDiners(partySize);
+            seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
             std::cout << "Party sucessfully seated at " << tableType << " " << tableNumber << std::endl;
         }
         if (tolower(input[0]) == 'n') {
@@ -174,7 +174,7 @@ void Menu::seatParty(std::vector<SeatingGroup*>& seating, std::list<std::string>
                     std::cout << "Party size is too large for this seating area." << std::endl;
                 }
                 else {
-                    seating[tableIndex]->setDiners(partySize);
+                    seating[tableIndex]->setDiners(partySize + seating[tableIndex]->getDiners());
                     std::cout << "Party sucessfully seated at " << tableType << " " << seating[tableIndex]->getTableNumber() << std::endl;
                 }
             }
