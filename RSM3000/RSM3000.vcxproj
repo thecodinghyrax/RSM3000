@@ -131,6 +131,7 @@
     <ClCompile Include="Booth.cpp" />
     <ClCompile Include="csvReader.cpp" />
     <ClCompile Include="fileReader.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="RSM3000.cpp" />
     <ClCompile Include="SeatingGroup.cpp" />
     <ClCompile Include="Table.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Bar.h" />
     <ClInclude Include="Booth.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SeatingGroup.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="WaitingArea.h" />
