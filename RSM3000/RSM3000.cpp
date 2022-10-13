@@ -54,10 +54,20 @@ int main()
             Menu::removeDiners(seating);
         }
         else if (input == "6") {
-            Menu::createSeatingConfig(seating);
+            try {
+                Menu::createSeatingConfig(seating);
+            }
+            catch (const char* err) {
+                std::cout << err << std::endl;
+            }
         }
         else if (input == "7") {
-            Menu::currentOccupancy(seating);
+            try {
+                Menu::currentOccupancy(seating);
+            }
+            catch (const char* err) {
+                std::cout << err << std::endl;
+            }
         }
         else if (input == "8") {
             CSVReader::chooseLoader(seating);
