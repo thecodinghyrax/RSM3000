@@ -9,7 +9,7 @@ protected:
 	int _capacity = 0;
 	int _numberOfDiners = 0;
 	std::string _timeSeated = "";
-	bool _occupied;
+	bool _occupied = false;
 
 	virtual void setOccupied(bool occupied) = 0;
 	virtual void setCapacity(int capacity) = 0;

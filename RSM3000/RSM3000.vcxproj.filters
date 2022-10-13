@@ -65,6 +65,9 @@
     <ClInclude Include="CSVReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="exampleSeatingChart.txt" />

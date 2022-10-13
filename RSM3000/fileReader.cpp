@@ -1,16 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <array>
-#include <algorithm>
-#include "Booth.h"
-#include "Bar.h"
-#include "Table.h"
-#include "SeatingGroup.h"
+#include "FileReader.h"
 
 //searches characters up, down, left, and right of index to find capacity of seating group
-char findCapacity(std::string stringToSearch, int startingIndex, int lineSize){
+char FileReader::findCapacity(std::string stringToSearch, int startingIndex, int lineSize){
     lineSize+=1;
     //right
     if (startingIndex < stringToSearch.size()){
@@ -42,7 +33,7 @@ char findCapacity(std::string stringToSearch, int startingIndex, int lineSize){
 }
 
 //Finds highest table number in seating vector
-int getHighestSeatingNo(std::vector<SeatingGroup*> seating){
+int FileReader::getHighestSeatingNo(std::vector<SeatingGroup*>& seating){
     int maxNo = 0;
     for (auto& s: seating){
         if (s->getTableNumber() > maxNo){
@@ -53,7 +44,7 @@ int getHighestSeatingNo(std::vector<SeatingGroup*> seating){
 }
 
 
-std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
+void FileReader::readFile(std::vector<SeatingGroup*>& vectorToAddTo) {
     std::string filePath;
     std::string line;
     int barSeats = 0;
@@ -115,9 +106,6 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
         outputString += "\n";
     }
 
-    // TODO - Can this be removed?
-    //std::pair<char, int>seatingGroupData;
-
     std::vector<std::pair<char, char>>seatingGroupDataStorage;
 
     //creates vector that stores each seating group with type and capacity
@@ -141,11 +129,6 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
     }
     //sorts seating groups
     std::sort(seatingGroupDataStorage.begin(), seatingGroupDataStorage.end());
-
-    //TODO - Can these be removed?
-    //int t1Count, t2Count, t3Count, t4Count, t5Count,  t6Count, t7Count, t8Count, t9Count,
-    //r1Count, r2Count, r3Count, r4Count, r5Count,  r6Count, r7Count, r8Count, r9Count,
-    //b1Count, b2Count, b3Count, b4Count, b5Count,  b6Count, b7Count, b8Count, b9Count = 0;
 
     //creates array to keep track of number of seating groups with the same capacity (ex. 2 tables of 4)
     std::array<std::pair<int, char>, 27>seatingGroupCount; //0-8 is booth, 9-17 is bar, 18-26 is table
@@ -308,7 +291,7 @@ std::vector<SeatingGroup *> readFile(std::vector<SeatingGroup*> vectorToAddTo){
             }
         }
     }
-    return std::vector<SeatingGroup*>{}; // TODO - this will need to be changed (a return is required)
+    //return std::vector<SeatingGroup*>{}; // TODO - this will need to be changed (a return is required)
 }
 
 
