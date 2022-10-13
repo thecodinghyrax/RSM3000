@@ -1,5 +1,15 @@
 #include "SeatingGroup.h"
 
+
+/**************************************************************
+* Method Name: promptForInt
+* Description:  Validation method that prompts a user for an
+*               int by asking for an item. User will be reprompted
+*               if the input is not valid. 
+* Input: string/name of the item to select
+*        bool/true if user can enter -1 to exit else false
+* Output: int/selection number
+***************************************************************/
 int SeatingGroup::promptForInt(std::string itemName, bool quitOption) {
     int userTemp;
     bool validInput = false;
@@ -24,11 +34,16 @@ int SeatingGroup::promptForInt(std::string itemName, bool quitOption) {
             }
         }
     }
-
     return userTemp;
 }
 
-
+/**************************************************************
+* Method Name: returnTableType
+* Description:  Conversion method that takes in a char and 
+*               returns the corresponding seating type, or invalid
+* Input: char/the letter that represents a seating group
+* Output: string/the name of the seating group
+***************************************************************/
 std::string returnTableType(char selection) {
     switch (tolower(selection)) {
     case 't':
@@ -47,7 +62,13 @@ std::string returnTableType(char selection) {
     }
 }
 
-
+/**************************************************************
+* Method Name: promptForSeatType
+* Description:  Validation method that prompts the user for a 
+*               char representing a seating group. Reprompts if invalid.
+* Input: none
+* Output: string/the name of the seating group
+***************************************************************/
 std::string SeatingGroup::promptForSeatType() {
     char userInput;
     std::string tableType;
@@ -68,6 +89,13 @@ std::string SeatingGroup::promptForSeatType() {
 
 }
 
+/**************************************************************
+* Method Name: partyWillFit
+* Description:  Validation method that checks if a party will fit 
+*               in a certain seating group
+* Input: int/size of the party
+* Output: bool/true if the party will fit else false
+***************************************************************/
 bool SeatingGroup::partyWillFit(int partySize){
     return (_capacity - _numberOfDiners) >= partySize;
 }

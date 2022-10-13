@@ -1,5 +1,6 @@
 #pragma once
 #include "SeatingGroup.h"
+
 class Table :
     public SeatingGroup
 {

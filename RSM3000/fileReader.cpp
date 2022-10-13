@@ -112,15 +112,12 @@ void FileReader::readFile(std::vector<SeatingGroup*>& vectorToAddTo) {
     for (int i = 0; i < outputString.size(); i++){
         switch (outputString[i]){
             case 'b':
-                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
                 seatingGroupDataStorage.push_back(std::make_pair('b',findCapacity(outputString, i, line.size())));
                 break;
             case 'r':
-                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
                 seatingGroupDataStorage.push_back(std::make_pair('r',findCapacity(outputString, i, line.size())));
                 break;
             case 't':
-                // TODO - 'argument': conversion from 'size_t' to 'int', possible loss of data
                 seatingGroupDataStorage.push_back(std::make_pair('t',findCapacity(outputString, i, line.size())));
                 break;
             default:

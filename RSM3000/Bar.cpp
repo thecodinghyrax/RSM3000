@@ -1,7 +1,6 @@
 #include "Bar.h"
 
 // Private
-
 void Bar::setCapacity(int capacity) {
 	_capacity = capacity;
 };
@@ -33,12 +32,15 @@ Bar::Bar(int tableNumber, int capacity) {
 Bar::~Bar() {
 };
 
+
 void Bar::setTableNumber(int tableNumber) {
 	_tableNumber = tableNumber;
 };
+
 int Bar::getTableNumber() {
 	return _tableNumber;
 };
+
 int Bar::getCapacity() {
 	return _capacity;
 };
@@ -46,9 +48,11 @@ int Bar::getCapacity() {
 void Bar::setTimeSeated(std::string time) {
 	_timeSeated = time;
 };
+
 std::string Bar::getTimeSeated() {
 	return _timeSeated;
 };
+
 bool Bar::getOccupied() {
 	return _occupied;
 };
@@ -70,6 +74,7 @@ void Bar::setDiners(int number) {
 		_numberOfDiners = number;
 	}
 };
+
 int Bar::getDiners() {
 	return _numberOfDiners;
 };

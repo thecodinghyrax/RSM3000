@@ -4,15 +4,19 @@ WaitingArea::WaitingArea() {
   setPartyNumber(0);
   setDinerName("");
 };
+
 WaitingArea::WaitingArea(std::string name, int num) {
   setPartyNumber(num);
   setDinerName(name);
 };
+
 WaitingArea::~WaitingArea() { };
+
 
 void WaitingArea::setTableNumber(int tableNumber) {
     _tableNumber = tableNumber;
 };
+
 int WaitingArea::getTableNumber() {
     return _tableNumber;
 };
@@ -20,6 +24,7 @@ int WaitingArea::getTableNumber() {
 void WaitingArea::setCapacity(int capacity) {
     _capacity = capacity;
 };
+
 int WaitingArea::getCapacity() {
     return _capacity;
 };
@@ -27,6 +32,7 @@ int WaitingArea::getCapacity() {
 void WaitingArea::setTimeSeated(std::string time) {
     _timeSeated = time;
 };
+
 std::string WaitingArea::getTimeSeated() {
     return _timeSeated;
 };
@@ -34,6 +40,7 @@ std::string WaitingArea::getTimeSeated() {
 void WaitingArea::setOccupied(bool occupied) {
     _occupied = occupied;
 };
+
 bool WaitingArea::getOccupied() {
     return _occupied;
 };
@@ -45,6 +52,7 @@ std::string WaitingArea::getSeatingType(){
 void WaitingArea::setDiners(int number) {
   _numberOfDiners = number;
 }
+
 int WaitingArea::getDiners() {
   return _numberOfDiners;
 }
@@ -60,6 +68,7 @@ int WaitingArea::getPartyNumber() {
 void WaitingArea::setDinerName(std::string name) {
   dinerName = name;
 }
+
 std::string WaitingArea::getDinerName() {
   return dinerName;
 }

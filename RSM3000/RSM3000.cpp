@@ -21,23 +21,6 @@ int main()
     list<string> waiting;
     string input;
 
-
-    // Default seating for testing
-  //Booth b = Booth();
-  //Booth b2 = Booth(204,4);
-  //Booth b3 = Booth(205,5);
-  //Bar r1 = Bar(300,30);
-  //Table t1 = Table(400);
-  //Table t2 = Table(401,6);
-  //Table t3 = Table(410,8);
-  //seating.push_back(&b);
-  //seating.push_back(&b2);
-  //seating.push_back(&b3);
-  //seating.push_back(&r1);
-  //seating.push_back(&t1);
-  //seating.push_back(&t2);
-  //seating.push_back(&t3);
-
     cout << "Restaurant Seating Manager 3000 Menu" << endl;
 
     while (input != "10"){

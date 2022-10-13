@@ -19,7 +19,6 @@ public:
 	void setTimeSeated(std::string time);
 	std::string getTimeSeated();
 
-
 	void setDiners(int number);
 	int getDiners();
 
