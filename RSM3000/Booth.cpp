@@ -34,6 +34,7 @@ Booth::Booth(int tableNumber, int capacity) {
 Booth::~Booth() {
 };
 
+
 void Booth::setTableNumber(int tableNumber) {
 	_tableNumber = tableNumber;
 };

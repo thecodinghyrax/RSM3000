@@ -1,5 +1,12 @@
 #include "CSVReader.h"
 
+/**************************************************************
+* Method Name: createCSV
+* Description:  Validation method that prompts the user for a
+*               char representing a seating group. Reprompts if invalid.
+* Input: vector<SeatingGroup>/the main seating configuration
+* Output: string/the name of the seating group
+***************************************************************/
 void CSVReader::createCSV(std::vector<SeatingGroup*> &mainVector){
     std::string filePath;
 
@@ -23,7 +30,13 @@ void CSVReader::createCSV(std::vector<SeatingGroup*> &mainVector){
     }
 }
 
-
+/**************************************************************
+* Method Name: readCSV
+* Description:  Validation method that prompts the user for a
+*               char representing a seating group. Reprompts if invalid.
+* Input: none
+* Output: string/the name of the seating group
+***************************************************************/
 void CSVReader::readCSV(std::vector<SeatingGroup*> &mainVector){
     std::vector<std::array<std::string, 3>>tables;
     std::string filePath;
@@ -89,6 +102,13 @@ void CSVReader::readCSV(std::vector<SeatingGroup*> &mainVector){
     }
 }
 
+/**************************************************************
+* Method Name: chooseLoader
+* Description:  Validation method that prompts the user for a
+*               char representing a seating group. Reprompts if invalid.
+* Input: none
+* Output: string/the name of the seating group
+***************************************************************/
 void CSVReader::chooseLoader(std::vector<SeatingGroup*>& mainVector) {
     int selection;
     bool valid = false;

@@ -32,6 +32,7 @@ Table::Table(int tableNumber, int capacity) {
 Table::~Table() {
 };
 
+
 void Table::setTableNumber(int tableNumber) {
 	_tableNumber = tableNumber;
 };
