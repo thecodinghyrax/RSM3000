@@ -88,4 +88,29 @@ void CSVReader::readCSV(std::vector<SeatingGroup*> &mainVector){
         }
     }
 }
+
+void CSVReader::chooseLoader(std::vector<SeatingGroup*>& mainVector) {
+    int selection;
+    bool valid = false;
+    while (!valid) {
+        std::cout << "Would you like to load the seating configuration from a CSV file (enter 1), an ASCII image (enter 2), or -1 to quit: " << std::endl;
+        selection = SeatingGroup::promptForInt("loader", true);
+        if (selection == 1) {
+            valid = true;
+            readCSV(mainVector);
+        }
+        else if (selection == 2) {
+            valid = true;
+            FileReader::readFile(mainVector);
+        }
+        else if (selection == -1) {
+            valid = true;
+            std::cout << "Exiting loader. No configuration was loaded." << std::endl;
+        }
+        else {
+            std::cout << "That was not a valid option. Enter 1 for CSV, 2 for ASCII image or -1 to exit." << std::endl;
+
+        }
+    }
+};
  

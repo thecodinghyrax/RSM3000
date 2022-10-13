@@ -11,12 +11,6 @@ class Menu
 private:
 	std::list<std::string> waiting;
 	std::string prefType;
-	//std::string name;
-	//int getSeatingRec(std::vector<SeatingGroup*> seating, std::string, int);
-	//int getNumOpenSeating(std::vector<SeatingGroup*>);
-	//static void removeFromBar(SeatingGroup&);
-	//static int getNumOpenSeating(std::vector<SeatingGroup*>& seating);
-	//static int getSeatingRec(std::vector<SeatingGroup*>&, std::string, int);
 public:
 	static void seatParty(std::vector<SeatingGroup*>&, std::list<std::string>&);
 	static void viewWaiting(std::list<std::string>&);

@@ -141,6 +141,7 @@
     <ClInclude Include="Bar.h" />
     <ClInclude Include="Booth.h" />
     <ClInclude Include="CSVReader.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="SeatingGroup.h" />
     <ClInclude Include="Table.h" />
